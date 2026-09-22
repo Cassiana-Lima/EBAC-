@@ -1,28 +1,35 @@
+#language: pt
 
-
-Feature: Cadastro Checkout
+Funcionalidade: Cadastro Checkout
     Como cliente da Plataforma EBAC Shop
     Quero concluir meu cadastro
     Para finalizar minha compra
 
-    Background:
-        Given que o cliente está na página de cadastro do Checkout
+    Contexto:
+        Dado que o cliente está na página de cadastro do Checkout
 
-    Scenario: Cadastro realizado com sucesso com todos os dados obrigatórios
-        When o cliente preenche todos os dados obrigatorios marcados com asteriscos
-        And clica em finalizar o cadastro
-        Then a plataforma deve realizar o cadastro com sucesso
+        Cenário: Cadastro realizado com sucesso com todos os dados obrigatórios
+        Quando o cliente preenche todos os dados obrigatorios marcados com asteriscos
+        E clica em finalizar o cadastro
+        Entao a plataforma deve realizar o cadastro com sucesso
 
 
-        Scenario Outline: Scenario Outline name: Verificacao de e-mail e campos obrigatórios
-        When o cliente preenche um <e-mail> inválido
-        And os <campos_obrigatorios>
-        Then a plataforma deve exibir a <mensagem de alerta>
+        Esquema do Cenário: Verificacao de e-mail 
+        Quando o cliente preenche um <e-mail> inválido
+        Entao a plataforma deve exibir a <mensagem de alerta>
 
-        Examples:
-        | e-mail              | campos_obrigatorios | mensagem de alerta                    |
-        | e-mail invalido     | válidos             | E-mail inválido                       |
-        | "maria@ebac.com.br" | vazios              | Preencha todos os campos obrigatórios |
+        Exemplos:
+        | e-mail              | mensagem de alerta |
+        | xxxxxxxxxxxxxxx     | E-mail inválido    |
+        | "maria@ebac.com.br" |                    | 
+
+        
+        Esquema do Cenário: Tentativa de cadastro com campos obrigatórios vázios
+        Quando o cliente deixa os campos obrigatórios vázios
+        E clica em finalizar cadastro 
+        Entao a plataforma deve exibir a mensagem "Preencha todos os campos obrigatórios"
+        
+
 
 
 
